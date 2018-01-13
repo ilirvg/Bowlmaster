@@ -13,7 +13,7 @@ public class CameraControl : MonoBehaviour {
 	
 	
 	void Update () {
-        if(transform.position.z <= 1829) { 
+        if(ball.transform.position.z <= 1829) { 
             transform.position = ball.transform.position + offset;
         }
     }
