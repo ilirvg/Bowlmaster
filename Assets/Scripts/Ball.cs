@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour {
-
     public Vector3 lounchVelocity;
     public bool lounched = false;
 
-    Vector3 ballStartingPosition;
-    Rigidbody rb;
-    AudioSource audioSource;
+    private Vector3 ballStartingPosition;
+    private Rigidbody rb;
+    private AudioSource audioSource;
 
     void Start () {
         rb = GetComponent<Rigidbody>();
@@ -29,6 +28,7 @@ public class Ball : MonoBehaviour {
     public void Reset() {
         lounched = false;
         transform.position = ballStartingPosition;
+        transform.rotation = Quaternion.identity;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.useGravity = false;
