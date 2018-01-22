@@ -1,36 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class Ball : MonoBehaviour {
-    public Vector3 lounchVelocity;
-    public bool lounched = false;
+    public Vector3 launchVeclocity;
+    public bool inPlay = false;
 
-    private Vector3 ballStartingPosition;
-    private Rigidbody rb;
+    private Vector3 ballStartPos;
+    private Rigidbody rigidBody;
     private AudioSource audioSource;
 
-    void Start () {
-        rb = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
-
-        rb.useGravity = false;
-        ballStartingPosition = transform.position;
+    // Use this for initialization
+    void Start() {
+        rigidBody = GetComponent<Rigidbody>();
+        rigidBody.useGravity = false;
+        ballStartPos = transform.position;
     }
 
-    public void Lounch(Vector3 velocity) {
-        lounched = true;
-        rb.velocity = velocity;
-        rb.useGravity = true;
+    public void Launch(Vector3 velocity) {
+        inPlay = true;
+
+        rigidBody.useGravity = true;
+        rigidBody.velocity = velocity;
+
+        audioSource = GetComponent<AudioSource>();
         audioSource.Play();
     }
 
     public void Reset() {
-        lounched = false;
-        transform.position = ballStartingPosition;
+        inPlay = false;
+        transform.position = ballStartPos;
         transform.rotation = Quaternion.identity;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.useGravity = false;
+        rigidBody.velocity = Vector3.zero;
+        rigidBody.angularVelocity = Vector3.zero;
+        rigidBody.useGravity = false;
     }
 }
